@@ -16,7 +16,22 @@ public class AsteroidPool : MonoBehaviour
         // TODO:
         //   Singleton.
         //   Fer les comprovacions necessàries perquè només hi hagi una instància d'aquest singleton 
-        // TODO:Inicialitza aquí la Pool amb base que es farà servir. 
+        // TODO:Inicialitza aquí la Pool amb base que es farà servir.
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else 
+        {
+            Destroy(gameObject);
+        }
+
+        for (int i = 0; i < initialSize; i++)
+        {
+            pool.Push(CreateAsteroid());
+        }
     }
 
     private Asteroid CreateAsteroid()
@@ -25,7 +40,10 @@ public class AsteroidPool : MonoBehaviour
         //   Instància els prefabs recorda que els has d'instanciar desactivats.
         //   Fixeu-vos que el mètode ha de retornar un Asteroid
 
-        return null;
+        Asteroid asteroid = Instantiate(asteroidPrefab);
+        asteroid.gameObject.SetActive(false);
+
+        return asteroid;
     }
 
     public Asteroid GetAsteroid(Vector3 position)

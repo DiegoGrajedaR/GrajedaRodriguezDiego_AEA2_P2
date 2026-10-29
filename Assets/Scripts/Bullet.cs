@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         // TODO: guarda el component Rigidboy (rb)
-        rb.GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void Init()

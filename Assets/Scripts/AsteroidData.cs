@@ -5,7 +5,10 @@ public class AsteroidData : ScriptableObject
 {
 	//TODO: introdueix les dades necesaties
 	public float scale;
-	public float speed;
-	public int impactsToDestroy;
+	public float minSpeed;
+	public float maxSpeed;
+	public int maxHealth;
+	public int damage = 1;
 	public int points;
+	public Color color;
 }
