@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else 
         {
@@ -42,6 +41,7 @@ public class GameManager : MonoBehaviour
         //   amaga el panell GameOver
         //   Crida UpdateUI().
         score = 0; lives = startingLives; IsGameOver = false;
+        gameOverPanel.SetActive(false);
         UpdateUI();
 
     }
@@ -60,10 +60,14 @@ public class GameManager : MonoBehaviour
         // TODO: Resta amount a lives i actualitza la UI.
         //       si lives < 0 GameOver().
         //       Extra: si el joc ja ha terminat no facis res
-        lives--;
+        if (IsGameOver) return;
+
+        lives -= amount;
+        lives = Mathf.Max(0, lives);
+
         UpdateUI();
 
-        if (lives < 0) 
+        if (lives <= 0) 
         {
             GameOver();
         }
@@ -76,11 +80,12 @@ public class GameManager : MonoBehaviour
         //     IsGameOver = true
         //     Fes aparèixer el panell de GameOver
         //     Congela el joc Time.timeScale = 0
+        if (IsGameOver) return;
+
         IsGameOver = true;
 
-        gameOverPanel = GetComponent<GameObject>();
         gameOverPanel.SetActive(true);
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
 
     }
 
@@ -91,7 +96,7 @@ public class GameManager : MonoBehaviour
         //     Time.timeScale = 1   (si no fas això reiniciarà congelat)
         //     fes un reload de l'escena:
         //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

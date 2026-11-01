@@ -16,5 +16,6 @@ MonoBehaviour:
   minSpeed: 2
   maxSpeed: 3
   maxHealth: 2
+  damage: 1
   points: 50
-  color: {r: 0.9622642, g: 0.41532177, b: 0.049928807, a: 1}
+  color: {r: 0.8584906, g: 0.5163965, b: 0.28751338, a: 1}
